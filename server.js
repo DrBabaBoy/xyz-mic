@@ -1,22 +1,30 @@
 const express = require('express');
-const app = express();
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+const http = require('http');
+const { Server } = require('socket.io');
 
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server);
+
+// Sirve los archivos estáticos desde la carpeta public
 app.use(express.static('public'));
 
-server.listen(3000, () => {
-  console.log('Server is running on port 3000');
+// Manejo de conexiones Socket.IO
+io.on('connection', (socket) => {
+    console.log('Un cliente se ha conectado');
+
+    socket.on('audio', (data) => {
+        // Reenvía el audio recibido a todos los demás clientes
+        socket.broadcast.emit('audio', data);
+    });
+
+    socket.on('disconnect', () => {
+        console.log('Un cliente se ha desconectado');
+    });
 });
 
-io.on('connection', (socket) => {
-  console.log('A user connected');
-
-  socket.on('audio', (audioData) => {
-    socket.broadcast.emit('audio', audioData);
-  });
-
-  socket.on('disconnect', () => {
-    console.log('User disconnected');
-  });
+// Inicia el servidor en el puerto 3000
+const PORT = 3000;
+server.listen(PORT, () => {
+    console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
