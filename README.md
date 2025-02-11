@@ -33,3 +33,19 @@ XYZ Mic is a proof-of-concept project that demonstrates real-time audio streamin
 
    ```bash
    git clone https://github.com/DrBabaBoy/xyz-mic.git
+   
+2. Navigate to the project directory:
+   ```bash
+   cd xyz-mic
+   
+3. Install the required dependencies:
+   ```bash
+npm install
+
+4. Start the server:
+   ```bash
+node server.js
+
+5.Open your browser and visit http://localhost:3000 to access the application.
+
+
