@@ -40,11 +40,11 @@ XYZ Mic is a proof-of-concept project that demonstrates real-time audio streamin
    
 3. Install the required dependencies:
    ```bash
-npm install
+   npm install
 
 4. Start the server:
    ```bash
-node server.js
+   node server.js
 
 5.Open your browser and visit http://localhost:3000 to access the application.
 
